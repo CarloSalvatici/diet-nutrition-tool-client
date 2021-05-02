@@ -1,0 +1,11 @@
+FUNCTIONALITY
+- create login to store user diet data 
+- search bar more results button
+- remove dud search results
+
+
+STYLING
+- create scrolling background picture
+- improve mobile functionality
+- create cleaner design, perhaps on hover expand for nutrition breakdown
+-

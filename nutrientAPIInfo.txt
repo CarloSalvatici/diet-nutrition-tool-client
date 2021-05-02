@@ -1,0 +1,26 @@
+Ideas
+------------------------------------------------------------------
+Make Branded, and unbranded tag, to specify raw food or branded food.
+
+
+
+Links
+------------------------------------------------------------------
+Hunt for not using fucking grams for everything: 
+https://fdc.nal.usda.gov/api-guide.html
+  Food Details Endpoint???
+https://fdc.nal.usda.gov/help.html#bkmk-2
+
+https://fdc.nal.usda.gov/faq.html
+
+https://fdc.nal.usda.gov/docs/BFPDB_Doc_Aug2018.pdf
+file:///C:/Users/PC/AppData/Local/Temp/Download_Field_Descriptions_Oct2020-1.pdf
+
+Nutrient Meanings: 
+https://www.ars.usda.gov/ARSUserFiles/80400530/pdf/fndds/FNDDS_2017_2018_factsheet.pdf
+https://www.ars.usda.gov/ARSUserFiles/80400530/pdf/fndds/2017_2018_FNDDS_Doc.pdf
+
+Daily Values: 
+https://ods.od.nih.gov/HealthInformation/dailyvalues.aspx
+
+
