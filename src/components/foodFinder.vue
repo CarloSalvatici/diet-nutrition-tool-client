@@ -76,7 +76,7 @@
             <img class="back-arrow ns-back-arrow" src="@/assets/back-arrow.png" alt="x-icon">
             <span class="ns-back-arrow-text">Back to Diet</span>
           </div>
-          <span class="nsi-info food-title1">{{ diet[nutrientListDietReferenceIndex].description }} ({{convertPortionToGrams(diet[nutrientListDietReferenceIndex])}}g)</span>
+          <span class="ns-title food-title1">{{ diet[nutrientListDietReferenceIndex].description }} ({{convertPortionToGrams(diet[nutrientListDietReferenceIndex])}}g)</span>
           <div class="ns-item" v-for="(item, index) in diet[nutrientListDietReferenceIndex].nutrients" :key='index'>
             <span class="nsi-info"><!--{{ item.nutrientId }}-->{{ item.nutrientName }} | Value {{ item.value }} {{ item.unitName }}</span>
           </div>
@@ -124,6 +124,7 @@
           </span>
         </div>
     </div>
+    <mainFooter/>
 
   </div>
 </template>
@@ -131,12 +132,13 @@
 <script>
 import dailyValue from '@/assets/daily-value.json'
 import postService from '../PostService'
+import mainFooter from './mainFooter'
 const axios = require('axios').default
 
 export default {
   name: 'HelloWorld',
-  props: {
-    msg: String
+  components: {
+    mainFooter
   },
   data() { 
     return {
@@ -655,6 +657,10 @@ li {
   margin: 0 10px;
 }
 
+* {
+  clear: right;
+}
+
 
 
 .container {
@@ -674,8 +680,8 @@ li {
   flex-basis: 0;
   flex-grow: 1;
   margin: 20px;
-  min-width: 400px;
   flex-wrap: wrap;
+  flex-basis: 400px;
 }
 
 .food-title1 {
@@ -740,12 +746,15 @@ li {
 .login-bar {
   background: #eee;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   padding: 20px;
+  flex-wrap: wrap;
 }
 
 .login-title {
   font-size: 1.5em;
+  margin: auto 0;
+  padding: 5px;
 }
 
 .lb-account {
@@ -754,6 +763,7 @@ li {
 
 .lb-status{
   margin: auto 0;
+  padding: 5px;
 }
 
 .li-form {
@@ -778,6 +788,7 @@ li {
   margin: auto;
   justify-content: center;
   max-width: 400px;
+  width: 100%;
   height: auto;
 }
 
@@ -787,6 +798,7 @@ li {
   display: flex;
   margin-bottom: 5px;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 .search-input {
@@ -815,11 +827,11 @@ li {
   text-align: center;
   justify-content: space-between;
 }
-.sr-item:hover {
-  background: rgba(0, 0, 0, .1);
-}
 .sr-item:nth-child(even){
   background: #eee;
+}
+.sr-item:hover {
+  background: rgba(0, 0, 0, .1);
 }
 
 .sr-button{
@@ -838,6 +850,7 @@ li {
 .sri-btn {
   margin-left: 2%;
   width: 15%;
+  min-width: 45px;
 }
 
 /* DIET */
@@ -852,7 +865,7 @@ li {
 
 .d-item {
   display: flex;
-  padding: 5px
+  padding: 5px;
 }
 
 .d-item:nth-child(even){
@@ -880,6 +893,24 @@ li {
 .di-btn {
   margin-left: 2%;
   width: 15%;
+  min-width: 60px;
+}
+
+.di-portion-index {
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media only screen and (max-width: 450px) {
+  .d-item {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .di-btn{
+    display: block;
+    width: 80%;
+  }
 }
 
 /* NUTRITION SPECIFICS */
@@ -893,8 +924,14 @@ li {
 }
 
 .ns-item {
-  border-bottom: 1px dotted black;
   margin: 2px;
+}
+.ns-item:nth-child(even) {
+  background: #eee
+}
+
+.ns-title {
+  margin: 0 30px;
 }
 
 .ns-back-arrow-wrapper {

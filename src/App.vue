@@ -1,20 +1,17 @@
 <template>
   <div id="app">
     <!--<mainHeader/>-->
-    <foodFinder msg="Welcome to Your Vue.js App"/>
-    <mainFooter/>
+    <foodFinder/>
   </div>
 </template>
 
 <script>
 import foodFinder from './components/foodFinder.vue'
-import mainFooter from './components/mainFooter.vue'
 
 export default {
   name: 'App',
   components: {
     foodFinder,
-    mainFooter
   }
 }
 </script>
