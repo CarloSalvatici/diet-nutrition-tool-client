@@ -4,7 +4,7 @@
     <div class="login-bar">
       <span class="login-title">Diet Nutrition Tool</span>
       <span v-if="accountInfo.username != ''" class="login-info lb-account">
-        <span class="li-username">{{accountInfo.username}} </span>
+        <div class="li-username">{{accountInfo.username}}</div>
         <button v-on:click="signOut()" class="li-sign-out btn">Save & Sign Out</button>
       </span>
       <span v-if="accountInfo.username == ''" class="login-input lb-account">
@@ -19,7 +19,7 @@
           </div>
         </form>
       </span>
-      <div class ="lb-status">{{ accountStatusMsg }}</div>
+      <div class ="lb-status" :style="lbStatusChange">{{ accountStatusMsg }}</div>
     </div>
 
     <img class="apple-img" alt="Apple" src="../assets/burger-fries.png">
@@ -175,7 +175,12 @@ export default {
       totalUserNutrition:{},
       totalUserNutritionReactive:[],
       reactiveDailyValue: dailyValue,
-      reactiveTimeframeValue: {}
+      reactiveTimeframeValue: {},
+
+      //CSS Styles
+      lbStatusChange: {
+        'font-style': 'normal'
+      }
     }
   },
   methods: {
@@ -188,6 +193,12 @@ export default {
       }
       // Backend request
       let res = await postService.attemptLogin(this.usernameInput, this.passwordInput)
+      //fdjsalkfjdsal
+      if (this.lbStatusChange['font-style'] == "normal"){
+        this.lbStatusChange = {'font-style': 'italic'}
+      } else {
+        this.lbStatusChange = {'font-style': 'normal'}
+      } 
       this.accountStatusMsg = res.msg
       //Checking if account is up to date
       let contemporaryAccount = this.checkAccountContemporaneity(res.account)
@@ -434,12 +445,15 @@ export default {
 
 
     displayNutrientList: function(dietIndex, displayBool) {
+      //Somtimes this function is used just to gather api data, so displaybool is for when i call it, if i want it to display or not
       if (displayBool) {
         this.nutrientDisplay = "block"
         this.dietDisplay = "none"
       }
+      //Variables for other functions idk which ones im writing these comments late
       this.nutrientListDietReferenceIndex = dietIndex
       this.displayNutrientListBlockingVariable = true
+      //Calling API and updating list
       console.log("Api call inside displayNutrientList is happening now")
       axios.get("https://api.nal.usda.gov/fdc/v1/foods/search", {
         params: {
@@ -447,12 +461,15 @@ export default {
           API_KEY: "i4ljZA3H5yxGNHOmFgcEbBy0U5Kiwxd7LWs2u3ya"
         }
       })
+        //so what I wanna do here is somehow manage the nutrients that nobody cares about
         .then(res => {
           console.log("Food object for nutrients list")
           console.log(res.data.foods[0])
+          //this is for keeping the number values consistent with the portion selected
           this.diet[dietIndex].nutrients = []
           this.diet[dietIndex].weight = this.convertPortionToGrams(this.diet[dietIndex])
           let foodScaleMultiplier = this.diet[dietIndex].weight/100
+
           let currentNutrientValue = 0
           for (let i in res.data.foods[0].foodNutrients) {
             currentNutrientValue = +(res.data.foods[0].foodNutrients[i].value*foodScaleMultiplier).toFixed(3)
@@ -766,6 +783,11 @@ li {
   padding: 5px;
 }
 
+.li-username {
+  margin-bottom: 3px;
+  font-weight: 600;
+}
+
 .li-form {
   display: flex;
   justify-content: center;
@@ -857,6 +879,7 @@ li {
 
 .diet {
   display: block;
+  min-height: 43px;
   max-height: 300px;
   border: 1px solid black;
   overflow: scroll;
@@ -917,6 +940,7 @@ li {
 
 .nutrition-specifics {
   display: block;
+  min-height: 43px;
   max-height: 300px;
   border: 1px solid black;
   overflow: scroll;
