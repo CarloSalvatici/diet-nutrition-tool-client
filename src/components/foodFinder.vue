@@ -78,7 +78,7 @@
           </div>
           <span class="ns-title food-title1">{{ diet[nutrientListDietReferenceIndex].description }} ({{convertPortionToGrams(diet[nutrientListDietReferenceIndex])}}g)</span>
           <div class="ns-item" v-for="(item, index) in diet[nutrientListDietReferenceIndex].nutrients" :key='index'>
-            <span class="nsi-info"><!--{{ item.nutrientId }}-->{{ item.nutrientName }} | Value {{ item.value }} {{ item.unitName }}</span>
+            <span class="nsi-info"><!--{{ item.nutrientId }}-->{{ item.nutrientName }} | Value {{ item.value }} {{ item.unitName }} | Minimum DV {{getDVPercentFromValue(item.value, item.nutrientId)}}</span>
           </div>
         </div>
       </div>
@@ -133,6 +133,7 @@
 import dailyValue from '@/assets/daily-value.json'
 import postService from '../PostService'
 import mainFooter from './mainFooter'
+import {round} from 'mathjs'
 const axios = require('axios').default
 
 export default {
@@ -494,7 +495,14 @@ export default {
       console.log(this.totalUserNutrition)
     },
 
-
+    getDVPercentFromValue: function(value, nutrientId) {
+      try{
+        let percent = round((value/dailyValue[nutrientId].min)*100, 2)
+        return percent + "%"
+      }catch{
+        return "Error"
+      }
+    },
 
 
 

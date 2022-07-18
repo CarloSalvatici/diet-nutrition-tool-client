@@ -10,6 +10,7 @@
   "dependencies": {
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
+    "mathjs": "^10.6.4",
     "vue": "^2.6.11",
     "vuetify": "^2.4.11"
   },
